@@ -5,12 +5,19 @@
   ignore_errors: yes
 
 - name: Add redis repository
-  apt_repository: repo='ppa:rwky/redis'
+  apt_repository:
+    repo: 'ppa:rwky/redis'
   when: redis_installed|failed
 
 - name: Install redis from package
-  apt: name=redis-server state=latest update_cache=yes
+  apt:
+    name: redis-server
+    state: latest
+    update_cache: yes
   when: redis_installed|failed
 
 - name: Ensure redis-server started and enabled
-  service: name=redis-server state=started enabled=yes
+  service:
+    name: redis-server
+    state: started
+    enabled: yes
