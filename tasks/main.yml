@@ -16,6 +16,14 @@
     update_cache: yes
   when: redis_installed|failed
 
+- name: Create data directory
+  file: state=directory path={{ redis.config.dir }} owner={{ redis.user }} group={{ redis.group }} recurse=yes
+
+- name: Install config
+  template: src=redis.conf.j2 dest={{ redis.config_path }}
+  notify:
+    - restart redis
+
 - name: Ensure redis-server started and enabled
   service:
     name: redis-server
