@@ -1,26 +1,27 @@
 ---
-config_path: /etc/redis/redis.conf
+redis:
+  config_path: /etc/redis/redis.conf
 
-user: redis
-group: redis
+  user: redis
+  group: redis
 
-config:
-  bind: 127.0.0.1
-  port: 6379
+  config:
+    bind: 127.0.0.1
+    port: 6379
 
-  loglevel: notice
-  logfile: /var/log/redis/redis-server.log
+    loglevel: notice
+    logfile: /var/log/redis/redis-server.log
 
-  databases: 16
+    databases: 16
 
-  maxmemory: 128mb
-  maxmemory_policy: volatile-lru
+    maxmemory: 128mb
+    maxmemory_policy: volatile-lru
 
-  appendonly: "no"
-  appendfsync: everysec
+    appendonly: "no"
+    appendfsync: everysec
 
-  dir: /var/lib/redis
-  save:
-    - 900 1
-    - 300 10
-    - 60 10000
+    dir: /var/lib/redis
+    save:
+      - 900 1
+      - 300 10
+      - 60 10000
