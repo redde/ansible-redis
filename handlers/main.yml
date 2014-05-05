@@ -3,3 +3,4 @@
   service:
     name: redis
     state: restarted
+  ignore_errors: yes
