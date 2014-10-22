@@ -1,6 +1,6 @@
 ---
 - name: restart redis
   service:
-    name: redis
+    name: redis-server
     state: restarted
   ignore_errors: yes

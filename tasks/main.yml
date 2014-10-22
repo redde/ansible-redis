@@ -17,10 +17,17 @@
   when: redis_installed|failed
 
 - name: Create data directory
-  file: state=directory path={{ redis.config.dir }} owner={{ redis.user }} group={{ redis.group }} recurse=yes
+  file:
+    state: directory
+    path: "{{ redis.config.dir }}"
+    owner: "{{ redis.user }}"
+    group: "{{ redis.group }}"
+    recurse: yes
 
 - name: Install config
-  template: src=redis.conf.j2 dest={{ redis.config_path }}
+  template:
+    src: redis.conf.j2
+    dest: "{{ redis.config_path }}"
   notify:
     - restart redis
 
@@ -29,3 +36,10 @@
     name: redis-server
     state: started
     enabled: yes
+
+- name: Add Redis monit config
+  template:
+    src: redis_monit.j2
+    dest: "/etc/monit/conf.d/redis-server"
+  notify:
+    - restart redis
